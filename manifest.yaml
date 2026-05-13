@@ -1,0 +1,16 @@
+manifestVersion: 1
+name: "@dougschaefer/servicenow"
+version: "2026.05.05.3"
+description: "ServiceNow integration model — OAuth client_credentials authentication with automatic token caching, generic Table API CRUD (query, get, create, update, delete), Aggregate API for data analysis, and a passthrough REST call for endpoints outside the Table API. Foundation for spoke development, administration, and ad-hoc operations against any ServiceNow instance."
+repository: https://github.com/dougschaefer6/swamp-servicenow
+additionalFiles:
+  - README.md
+  - LICENSE.txt
+labels:
+  - servicenow
+  - itsm
+  - integration
+  - rest-api
+  - oauth
+models:
+  - servicenow/instance.ts
