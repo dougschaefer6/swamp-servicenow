@@ -9,7 +9,7 @@ import {
 } from "./_client.ts";
 
 /**
- * @dougschaefer/servicenow-instance — General-purpose ServiceNow integration model.
+ * `@dougschaefer/servicenow-instance` — General-purpose ServiceNow integration model.
  *
  * Phase 1 surface: instance metadata, generic Table API CRUD, aggregate queries,
  * and a passthrough REST call for endpoints outside the Table API. Designed as the
@@ -86,7 +86,7 @@ type SnContext = {
  */
 export const model = {
   type: "@dougschaefer/servicenow-instance",
-  version: "2026.05.05.3",
+  version: "2026.05.27.1",
   globalArguments: ServicenowGlobalArgsSchema,
   resources: {
     "instance-info": {
