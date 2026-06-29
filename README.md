@@ -8,7 +8,13 @@ Designed as the foundation for ServiceNow spoke development, administrative task
 
 | Type | Description |
 |---|---|
-| `@dougschaefer/servicenow-instance` | Instance-level operations: identity, table CRUD, aggregates, generic REST |
+| `@dougschaefer/servicenow-instance` | Instance-level operations: identity, table CRUD, aggregates, generic REST, and OAuth provider provisioning |
+
+## Installation
+
+```bash
+swamp extension pull @dougschaefer/servicenow
+```
 
 ## Authentication
 
@@ -96,6 +102,26 @@ Passthrough REST call for endpoints outside the Table API (Scripted REST APIs, I
 swamp model method run my-instance restCall \
   --arg path=/api/sn_chg_rest/change \
   --arg method=GET --json
+```
+
+### `setupOAuthProvider`
+
+Fan-out helper that stands up a third-party OAuth 2.0 provider for an integration spoke in a single execution: creates the OAuth Application Registry record (`oauth_entity`), its default profile, all scope records, and the profile↔scope links. Use this to provision the provider side of a spoke before connecting accounts.
+
+```bash
+swamp model method run my-instance setupOAuthProvider \
+  --arg name="My Spoke Provider" \
+  --arg clientId=... --arg clientSecret=... --json
+```
+
+### `addOAuthAccount`
+
+Per-account step for an interactive (authorization_code) provider: creates an OAuth 2.0 Credential bound to the provider's default profile, an HTTP Connection bound to a shared Connection & Credential Alias, and optionally an operational-registry row referencing the connection. Pass `connectionAliasSysId` to reuse an existing alias, or `connectionAliasName` to mint one.
+
+```bash
+swamp model method run my-instance addOAuthAccount \
+  --arg providerSysId=... \
+  --arg connectionAliasName=my-spoke-alias --json
 ```
 
 ## Token Caching
